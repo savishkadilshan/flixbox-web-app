@@ -16,7 +16,6 @@ export default function MainGameShowcaseUI({gameData}) {
      * gameDataObj (object) -> gameDataArray (array)
      */
     const gameDataArray = Object.values(gameDataObj)
-    console.log(gameDataArray)
 
     return (
         <div className="flex-1">

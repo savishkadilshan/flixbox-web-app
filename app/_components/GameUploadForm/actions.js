@@ -6,7 +6,6 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid';
 
 const storage = getStorage(app)
-const uuid = uuidv4()
 
 export async function gameUpload(formData) {
     const uri = process.env.NEXT_PUBLIC_MONGODB_URI
@@ -18,8 +17,8 @@ export async function gameUpload(formData) {
         }
     });
 
-    await uploadGameCoverImage(formData)
-    const imageUrl = await getImageUrl()
+    const uuid = await uploadGameCoverImage(formData)
+    const imageUrl = await getImageUrl(uuid)
 
     try {
         await client.connect()
@@ -42,22 +41,34 @@ export async function gameUpload(formData) {
 }
 
 async function uploadGameCoverImage(formData) {
+    const uuid = uuidv4()
     const imageRef = ref(storage, `flixbox/games/${uuid}`)
     
     try {
         await uploadBytes(imageRef, formData.get('upload-img'))
         console.log("Image upload is successful.")
+
+        /**
+         * This uuid return value will be use getImageUrl() function.
+         * Why return this uuid? uuid is unique identifier for upload image and that identifier
+         * will save as image name.
+         * So, getImageUrl() function needs to know what is current uploaded image name and
+         * with using return uuid value getImageUrl() function can know about the image
+         */
+        return uuid
     } catch (error) {
         console.log("There is an issue while uploading game cover image. Error: ", error)
     }
 }
 
-/*
- This getImageUrl() function is needs to fetch uploaded game cover image
- and return value will be use in the gameUpload() function to store cover image
- along with the game title in MongoDB document.
-*/
-async function getImageUrl() {
+/**
+ * This getImageUrl() function is needs to fetch uploaded game cover image
+ * and return value will be use in the gameUpload() function to store cover image
+ * along with the game title in MongoDB document.
+ * @param {*} uuid 
+ * @returns 
+ */
+async function getImageUrl(uuid) {
     try {
         const url = await getDownloadURL(ref(storage, `flixbox/games/${uuid}`))
         return url
