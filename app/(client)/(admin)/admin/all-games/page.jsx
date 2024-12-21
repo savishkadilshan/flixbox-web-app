@@ -1,6 +1,16 @@
+import getGameDetails from "@/app/_actions/getGameDetails";
+import AdminAllGameDisplay from "@/app/_components/AdminAllGameDisplay/AdminAllGameDisplay";
 import Sidebar from "@/app/_components/Sidebar/Sidebar";
 
-export default function AllGamesPage() {
+export default async function AllGamesPage() {
+  const gameDetails = await getGameDetails()
+
+  /**
+   * gameDetail variable needs convert to JSON string, because plain object
+   * should be pass for component prop.
+   * gameDetails (array object) -> gameDetailsJson (JSON string)
+   */
+  const gameDetailsJson = JSON.stringify(gameDetails)
   return (
     <div className="flex">
       {/* Sidebar */}
@@ -11,6 +21,7 @@ export default function AllGamesPage() {
         <h1 className="text-3xl font-semibold text-gray-800">
           All the added games
         </h1>
+        <AdminAllGameDisplay gameData={gameDetailsJson} />
       </main>
     </div>
   );
