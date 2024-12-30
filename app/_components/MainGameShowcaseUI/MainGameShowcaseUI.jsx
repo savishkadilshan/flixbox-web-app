@@ -19,12 +19,9 @@ export default function MainGameShowcaseUI({gameData}) {
 
     return (
         <div className="flex-1">
-            <div>
-                Newly added games
-            </div>
             <div className="flex flex-wrap gap-3">
                 {gameDataArray.map((game) => (
-                    <div key={game._id} className="w-1/5">
+                    <div key={game._id} className="w-32">
                         <DisplayCard gameId={game._id} coverUrl={game.coverUrl} gameTitle={game.gameTitle} />
                     </div>
                 ))}

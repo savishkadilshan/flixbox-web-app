@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import getGameDetails from "./_actions/getGameDetails";
 import MainGameShowcaseUI from "./_components/MainGameShowcaseUI/MainGameShowcaseUI";
-import UserGameListSidebar from "./_components/UserGameListSidebar/UserGameListSidebar";
+import UserSidebar from "./_components/UserSlidebar/UserSlidebar";
 
 export default async function Home() {
   const gameDetails = await getGameDetails()
@@ -14,10 +14,13 @@ export default async function Home() {
   const gameDetailsJson = JSON.stringify(gameDetails)
 
   return (
-    <div className="min-h-screen font-[family-name:var(--font-geist-sans)]">
-      <main className="flex">
+    <div className="flex">
+      {/* Sidebar */}
+      <UserSidebar />
+
+      <main className="flex-1 bg-gray-100 p-6">
+        <h1 className="text-3xl font-semibold text-gray-800 mb-6">New Added Games</h1>
         <Suspense fallback={<div>Loading...</div>}>
-          <UserGameListSidebar />
           <MainGameShowcaseUI gameData={gameDetailsJson} />
         </Suspense>
       </main>
