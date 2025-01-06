@@ -4,7 +4,7 @@ import { decrypt } from "@/app/_utils/session/session";
 import { cookies } from "next/headers";
 import { MongoClient, ObjectId, ServerApiVersion } from "mongodb";
 
-export async function saveAndUpdateMyList(gameId) {
+export async function saveAndUpdateMyList(gameId, gameTitle, coverUrl) {
   const cookie = (await cookies()).get("session")?.value;
   const session = await decrypt(cookie);
 
@@ -44,6 +44,8 @@ export async function saveAndUpdateMyList(gameId) {
             $push: {
               games: {
                 gameId: new ObjectId(gameId),
+                gameTitle: gameTitle,
+                coverUrl: coverUrl
               },
             },
           },

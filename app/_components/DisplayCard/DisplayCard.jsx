@@ -23,7 +23,7 @@ export default function DisplayCard({ gameId, coverUrl, gameTitle }) {
 
     const handleButtonSubmit = async () => {
         try {
-            await saveAndUpdateMyList(gameId)
+            await saveAndUpdateMyList(gameId, gameTitle, coverUrl)
             setIsSaved(!isSaved)
         } catch (error) {
             console.log("There is some error with button handling. Error: ", error)
