@@ -1,21 +1,13 @@
 "use server";
 
+import { getDbClient } from "@/app/_utils/mongodb/mongoClient";
 import { createSession } from "@/app/_utils/session/session";
-import { MongoClient, ServerApiVersion } from "mongodb";
 
 export default async function login(prevState, formData) {
-  const uri = process.env.NEXT_PUBLIC_MONGODB_URI;
-  const client = new MongoClient(uri, {
-    serverApi: {
-      version: ServerApiVersion.v1,
-      strict: true,
-      deprecationErrors: true,
-    },
-  });
   const bcrypt = require("bcrypt");
 
   try {
-    await client.connect();
+    const client = await getDbClient();
     const database = client.db("FlixBox");
     const collection = database.collection("users");
 
@@ -54,7 +46,5 @@ export default async function login(prevState, formData) {
       "There is an issue while connecting to FlixBox database. Error: ",
       error
     );
-  } finally {
-    await client.close();
   }
 }

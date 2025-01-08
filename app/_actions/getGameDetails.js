@@ -1,17 +1,8 @@
-import { MongoClient, ServerApiVersion } from "mongodb";
+import { getDbClient } from "../_utils/mongodb/mongoClient";
 
 export default async function getGameDetails() {
-    const uri = process.env.NEXT_PUBLIC_MONGODB_URI
-    const client = new MongoClient(uri, {
-        serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true,
-        }
-    })
-
     try {
-        await client.connect()
+        const client = await getDbClient();
         const database = client.db('FlixBox')
         const collection = database.collection('games')
     
@@ -19,7 +10,5 @@ export default async function getGameDetails() {
         return data
     } catch (error) {
         console.log("There is an issue while connecting to FlixBox database. Error: ", error)
-    } finally {
-        await client.close()
     }
 }

@@ -2,23 +2,15 @@
 
 import { decrypt } from "@/app/_utils/session/session";
 import { cookies } from "next/headers";
-import { MongoClient, ObjectId, ServerApiVersion } from "mongodb";
+import { ObjectId } from "mongodb";
+import { getDbClient } from "@/app/_utils/mongodb/mongoClient";
 
 export async function saveAndUpdateMyList(gameId, gameTitle, coverUrl) {
   const cookie = (await cookies()).get("session")?.value;
   const session = await decrypt(cookie);
 
-  const uri = process.env.NEXT_PUBLIC_MONGODB_URI;
-  const client = new MongoClient(uri, {
-    serverApi: {
-      version: ServerApiVersion.v1,
-      strict: true,
-      deprecationErrors: true,
-    },
-  });
-
   try {
-    await client.connect();
+    const client = await getDbClient();
     const database = client.db("FlixBox");
     const collection = database.collection("my-list");
 
@@ -57,8 +49,6 @@ export async function saveAndUpdateMyList(gameId, gameTitle, coverUrl) {
     }
   } catch (error) {
     console.log("There is an issue while connecting to FlixBox database. Error: ", error);
-  } finally {
-    await client.close();
   }
 }
 
@@ -66,17 +56,8 @@ export async function checkGameIsSaved(gameId) {
     const cookie = (await cookies()).get("session")?.value;
     const session = await decrypt(cookie);
 
-    const uri = process.env.NEXT_PUBLIC_MONGODB_URI;
-    const client = new MongoClient(uri, {
-        serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true,
-        },
-    });
-
     try {
-        await client.connect();
+        const client = await getDbClient();
         const database = client.db("FlixBox");
         const collection = database.collection("my-list");
 
@@ -90,7 +71,5 @@ export async function checkGameIsSaved(gameId) {
         }
     } catch (error) {
         console.log("There is an issue while connecting to FlixBox database. Error: ", error);
-    } finally {
-        await client.close();
     }
 }

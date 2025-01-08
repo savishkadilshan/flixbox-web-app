@@ -1,27 +1,19 @@
 'use server'
 
-import { MongoClient, ServerApiVersion } from "mongodb";
 import { app } from "@/app/_utils/firebase/firebaseConfig";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid';
+import { getDbClient } from "@/app/_utils/mongodb/mongoClient";
 
 const storage = getStorage(app)
 
 export async function gameUpload(formData) {
-    const uri = process.env.NEXT_PUBLIC_MONGODB_URI
-    const client = new MongoClient(uri, {
-        serverApi: {
-          version: ServerApiVersion.v1,
-          strict: true,
-          deprecationErrors: true,
-        }
-    });
 
     const uuid = await uploadGameCoverImage(formData)
     const imageUrl = await getImageUrl(uuid)
 
     try {
-        await client.connect()
+        const client = await getDbClient();
         const database = client.db('FlixBox')
         const collection = database.collection('games')
 
@@ -35,8 +27,6 @@ export async function gameUpload(formData) {
         }
     } catch (error) {
         console.log("There is an issue: ", error)
-    } finally {
-        await client.close()
     }
 }
 
