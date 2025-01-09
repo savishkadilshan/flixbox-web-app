@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FiGrid, FiLogOut } from "react-icons/fi";
-import logout from "@/app/_actions/logout";
+import { logout } from "@/app/_actions/logout";
 
 export default function UserSidebar() {
   const router = useRouter();

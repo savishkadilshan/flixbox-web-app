@@ -1,6 +1,7 @@
 'use server'
 
 import { getDbClient } from "@/app/_utils/mongodb/mongoClient";
+import { createSession } from "@/app/_utils/session/session";
 
 export async function adminLogin(prevState, formData) {
     const username = formData.get('username')
@@ -13,9 +14,7 @@ export async function adminLogin(prevState, formData) {
 
         const data = await collection.findOne({username: username, password: password})
         if(data) {
-            console.log("User credentials are found.")
-            console.log(data)
-            
+            await createSession(username, 'admin')
             return {
                 success: true,
                 redirectUrl: '/admin'

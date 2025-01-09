@@ -33,7 +33,7 @@ export default async function login(prevState, formData) {
 
     if(storedEmailInDatabase && comparedPassword) {
         console.log("Login successful")
-        await createSession(storedEmailInDatabase)
+        await createSession(storedEmailInDatabase, "normal-user")
         return {
             success: true,
             redirectUrl: '/'

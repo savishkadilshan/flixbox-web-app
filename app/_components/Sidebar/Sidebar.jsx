@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FiGrid, FiLogOut } from "react-icons/fi";
+import { adminLogout } from "@/app/_actions/logout";
 
 export default function Sidebar() {
   const router = useRouter();
@@ -18,19 +19,18 @@ export default function Sidebar() {
       {/* Navigation Tabs */}
       <nav className="flex-1 mt-6">
         <ul>
-          <li 
+          <li
             className="flex items-center px-4 py-3 my-1 cursor-pointer bg-blue-500 text-white"
             onClick={() => {
               router.push("/admin");
             }}
           >
-              <FiGrid className="text-lg mr-3" />
-              <span>Dashboard</span>
+            <FiGrid className="text-lg mr-3" />
+            <span>Dashboard</span>
           </li>
           <li
-            className={`flex items-center px-4 py-3 cursor-pointer ${
-              activeTab === "All Games" ? "bg-blue-500 text-white" : "hover:bg-gray-800"
-            } transition duration-300`}
+            className={`flex items-center px-4 py-3 cursor-pointer ${activeTab === "All Games" ? "bg-blue-500 text-white" : "hover:bg-gray-800"
+              } transition duration-300`}
             onClick={() => {
               setActiveTab("All Games");
               router.push("/admin/all-games");
@@ -43,16 +43,15 @@ export default function Sidebar() {
       </nav>
 
       {/* Sign Out Option */}
-      <div
-        className="mt-auto px-4 py-3 cursor-pointer flex items-center hover:bg-red-600 transition duration-300"
-        onClick={() => {
-          console.log("Sign Out Clicked");
-          // Add sign-out logic here
-        }}
-      >
-        <FiLogOut className="text-lg mr-3" />
-        <span>Sign Out</span>
-      </div>
+      <form action={adminLogout}>
+        <button
+          type="submit"
+          className="w-full mt-auto px-4 py-3 cursor-pointer flex items-center hover:bg-red-600 transition duration-300"
+        >
+          <FiLogOut className="text-lg mr-3" />
+          <span>Sign Out</span>
+        </button>
+      </form>
     </div>
   );
 }
