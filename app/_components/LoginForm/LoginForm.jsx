@@ -37,7 +37,7 @@ export default function LoginForm() {
                 id="email"
                 name="email"
                 placeholder="you@example.com"
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none focus:border-blue-500"
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none focus:border-orange-500"
               />
             </div>
             <div className="mb-4">
@@ -52,12 +52,12 @@ export default function LoginForm() {
                 id="password"
                 name="password"
                 placeholder="********"
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none focus:border-blue-500"
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none focus:border-orange-500"
               />
             </div>
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300"
+              className="w-full bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-600 transition duration-300"
             >
               Log In
             </button>
@@ -66,7 +66,7 @@ export default function LoginForm() {
             Don't have an account?{" "}
             <a
               href="/signup"
-              className="text-blue-500 hover:underline transition"
+              className="text-orange-500 hover:underline transition"
             >
               Sign up
             </a>
@@ -74,7 +74,7 @@ export default function LoginForm() {
           <div className="text-center mt-4">
             <a
               href="#"
-              className="text-sm text-blue-400 hover:underline transition"
+              className="text-sm text-orange-400 hover:underline transition"
             >
               Forgot your password?
             </a>

@@ -45,7 +45,7 @@ export default function DisplayCard({ gameId, coverUrl, gameTitle }) {
                 <button
                     type="button"
                     onClick={handleButtonSubmit}
-                    className={`px-4 py-2 rounded ${isSaved ? 'bg-green-500 text-white' : 'bg-gray-300 text-black'}`}
+                    className={`px-4 py-2 rounded ${isSaved ? 'bg-orange-500 text-white' : 'bg-gray-300 text-black'}`}
                 >
                     {isSaved ? 'Saved' : 'Save'}
                 </button>

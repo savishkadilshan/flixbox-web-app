@@ -19,7 +19,7 @@ export default function GameUploadForm() {
                         type="text"
                         name="game-title"
                         id="game-title"
-                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
                         placeholder="Far Cry, Call of Duty..."
                         required
                     />
@@ -38,7 +38,7 @@ export default function GameUploadForm() {
                         name="upload-img"
                         id="upload-img"
                         accept="image/png, image/jpeg, image/webp"
-                        className="block w-full text-sm text-gray-600 border border-gray-300 rounded-lg cursor-pointer focus:outline-none file:bg-blue-500 file:text-white file:px-4 file:py-2 file:border-0 hover:file:bg-blue-600"
+                        className="block w-full text-sm text-gray-600 border border-gray-300 rounded-lg cursor-pointer focus:outline-none file:bg-orange-500 file:text-white file:px-4 file:py-2 file:border-0 hover:file:bg-orange-600"
                         required
                     />
                 </div>
@@ -46,7 +46,7 @@ export default function GameUploadForm() {
                 {/* Submit Button */}
                 <button
                     type="submit"
-                    className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300 font-medium"
+                    className="w-full bg-orange-500 text-white py-2 px-4 rounded-lg hover:bg-orange-600 transition duration-300 font-medium"
                 >
                     Add Game
                 </button>

@@ -22,7 +22,7 @@ export default function SearchBar() {
     return (
         <div className="flex items-center justify-center bg-gray-100">
             <div className="w-full max-w-2xl py-6">
-                <div className="flex items-center bg-white rounded-full shadow-md overflow-hidden border border-gray-200 focus-within:border-blue-500 transition duration-300">
+                <div className="flex items-center bg-white rounded-full shadow-md overflow-hidden border border-gray-200 focus-within:border-orange-500 transition duration-300">
                     {/* Search Icon */}
                     <span className="px-4 text-gray-500">
                         <MagnifyingGlassIcon className="h-5 w-5" />

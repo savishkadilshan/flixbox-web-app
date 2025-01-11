@@ -12,7 +12,7 @@ export default function Sidebar() {
   return (
     <div className="h-screen w-64 bg-gray-900 text-gray-200 flex flex-col shadow-lg">
       {/* System Name */}
-      <div className="py-6 px-4 bg-blue-600 flex items-center justify-center">
+      <div className="py-6 px-4 bg-orange-600 flex items-center justify-center">
         <h1 className="text-2xl font-bold text-white">FlixBox</h1>
       </div>
 
@@ -20,7 +20,7 @@ export default function Sidebar() {
       <nav className="flex-1 mt-6">
         <ul>
           <li
-            className="flex items-center px-4 py-3 my-1 cursor-pointer bg-blue-500 text-white"
+            className="flex items-center px-4 py-3 my-1 cursor-pointer bg-orange-500 text-white"
             onClick={() => {
               router.push("/admin");
             }}
@@ -29,7 +29,7 @@ export default function Sidebar() {
             <span>Dashboard</span>
           </li>
           <li
-            className={`flex items-center px-4 py-3 cursor-pointer ${activeTab === "All Games" ? "bg-blue-500 text-white" : "hover:bg-gray-800"
+            className={`flex items-center px-4 py-3 cursor-pointer ${activeTab === "All Games" ? "bg-orange-500 text-white" : "hover:bg-gray-800"
               } transition duration-300`}
             onClick={() => {
               setActiveTab("All Games");
