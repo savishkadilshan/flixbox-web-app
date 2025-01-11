@@ -1,17 +1,15 @@
-import { Suspense } from "react";
-import getGameDetails from "./_actions/getGameDetails";
-import MainGameShowcaseUI from "./_components/MainGameShowcaseUI/MainGameShowcaseUI";
 import UserSidebar from "./_components/UserSlidebar/UserSlidebar";
+import SearchBar from "./_components/SearchBar/SearchBar";
+import fetchGamesByQuery from "./_actions/fetchGamesByQuery";
+import DisplayCard from "./_components/DisplayCard/DisplayCard";
 
-export default async function Home() {
-  const gameDetails = await getGameDetails()
+export default async function Home({ searchParams }) {
+  const { query = "" } = await searchParams;
 
-  /**
-   * gameDetail variable needs convert to JSON string, because plain object
-   * should be pass for component prop.
-   * gameDetails (array object) -> gameDetailsJson (JSON string)
-   */
-  const gameDetailsJson = JSON.stringify(gameDetails)
+  // cleaning and normalizing data
+  const returnedGames = Object.values(
+    JSON.parse(JSON.stringify(await fetchGamesByQuery(query)))
+  );
 
   return (
     <div className="flex">
@@ -19,10 +17,22 @@ export default async function Home() {
       <UserSidebar />
 
       <main className="flex-1 bg-gray-100 p-6">
-        <h1 className="text-3xl font-semibold text-gray-800 mb-6">New Added Games</h1>
-        <Suspense fallback={<div>Loading...</div>}>
-          <MainGameShowcaseUI gameData={gameDetailsJson} />
-        </Suspense>
+        <SearchBar />
+
+        <div className="flex-1">
+          <div className="flex flex-wrap gap-3">
+            {returnedGames.map((game) => (
+              <div key={game._id} className="w-32">
+                <DisplayCard
+                  gameId={game._id}
+                  coverUrl={game.coverUrl}
+                  gameTitle={game.gameTitle}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
       </main>
     </div>
   );
