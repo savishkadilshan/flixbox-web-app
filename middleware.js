@@ -21,7 +21,9 @@ export async function middleware(request) {
             return NextResponse.redirect(new URL('/login', request.nextUrl));
         }
     } else if (isAdminProtectedRoutes) {
-        if (!session?.userId) {
+        if (session?.userId && session?.role !== 'admin') {
+            return NextResponse.rewrite(new URL('/not-found', request.nextUrl));
+        } else if (!session?.userId) {
             return NextResponse.redirect(new URL('/admin/login', request.nextUrl));
         }
     } else if (isAdminLoginProtectedRoute) {
