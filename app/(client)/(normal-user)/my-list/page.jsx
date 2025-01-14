@@ -4,13 +4,7 @@ import UserSidebar from "@/app/_components/UserSlidebar/UserSlidebar";
 
 export default async function MyList() {
     const userMyListDoc = await getMyList()
-
-    /**
-     * userMyListDoc variable needs convert to JSON string, because plain object
-     * should be pass for component prop.
-     * userMyListDoc (array object) -> userMyListDocJSON (JSON string)
-     */
-    const userMyListDocJSON = JSON.stringify(userMyListDoc?.games)
+    const userMyListDocJSON = userMyListDoc ? JSON.stringify(userMyListDoc?.games) : ""
     
     return (
         <div className="flex">

@@ -12,7 +12,12 @@ export default async function getMyList() {
         const collection = database.collection("my-list");
 
         const userMyListDoc = await collection.findOne({ _id: session?.userId.userEmail });
-        return userMyListDoc;
+
+        if (userMyListDoc === null) {
+            return "";
+        } else {
+            return userMyListDoc;
+        }
     } catch (error) {
         console.log("There is an issue while connecting to FlixBox database. Error: ", error);
     }
