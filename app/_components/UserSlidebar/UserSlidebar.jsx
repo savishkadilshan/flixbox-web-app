@@ -10,7 +10,7 @@ export default function UserSidebar() {
   const [activeTab, setActiveTab] = useState("All Games");
 
   return (
-    <div className="h-screen w-64 bg-gray-900 text-gray-200 flex flex-col shadow-lg">
+    <div className="h-screen w-64 bg-gray-200 text-black flex flex-col shadow-lg">
       {/* System Name */}
       <div className="py-6 px-4 bg-orange-600 flex items-center justify-center">
         <h1 className="text-2xl font-bold text-white">FlixBox</h1>
@@ -29,7 +29,7 @@ export default function UserSidebar() {
             <span>Home</span>
           </li>
           <li
-            className={`flex items-center px-4 py-3 cursor-pointer ${activeTab === "My List" ? "bg-orange-500 text-white" : "hover:bg-gray-800"
+            className={`flex items-center px-4 py-3 cursor-pointer ${activeTab === "My List" ? "bg-orange-500 text-white" : "hover:bg-orange-300"
               } transition duration-300`}
             onClick={() => {
               setActiveTab("My List");
@@ -46,7 +46,7 @@ export default function UserSidebar() {
       <form action={logout}>
         <button
           type="submit"
-          className="w-full mt-auto px-4 py-3 cursor-pointer flex items-center hover:bg-red-600 transition duration-300"
+          className="w-full mt-auto px-4 py-3 cursor-pointer flex items-center hover:bg-red-600 hover:text-white transition duration-300"
         >
           <FiLogOut className="text-lg mr-3" />
           <span>Sign Out</span>
