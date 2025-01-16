@@ -4,7 +4,7 @@ import { gameUpload } from "./actions"
 
 export default function GameUploadForm() {
     return (
-        <div className="bg-white shadow-lg rounded-lg p-6 max-w-md mx-auto">
+        <div className="bg-white shadow-lg rounded-lg p-6 mt-6 max-w-md mx-auto">
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">Upload New Game</h2>
             <form className="space-y-4" action={gameUpload}>
                 {/* Game Title */}
