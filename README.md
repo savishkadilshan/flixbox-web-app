@@ -10,7 +10,7 @@ The application is currently under development.
 
 ### 1. Clone the Repository
 
-Since the application is currently under development, all the source code is in the `develop` branch. Make sure to clone the `develop` branch instead of the `main` branch.
+Since the application is currently under development, there may be some bugs, and certain features might not work as expected.
 
 ### 2. Installing Dependencies
 
